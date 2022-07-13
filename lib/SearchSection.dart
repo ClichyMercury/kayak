@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kayak/MyServices.dart';
+
 import 'calendar_page.dart';
 
+final TextEditingController name1 = TextEditingController();
 const d_green = Color(0xFF54D3C2);
+MyService _myservice = MyService();
+List hotelList = _myservice.myMap;
+dynamic testdata = hotelList[1];
 
-class SearchSection extends StatelessWidget {
+class SearchSection extends StatefulWidget {
+  @override
+  State<SearchSection> createState() => _SearchSectionState();
+}
+
+String? recherche;
+
+class _SearchSectionState extends State<SearchSection> {
   @override
   Widget build(BuildContext context) {
+    var firstList = [1, 2, 3, 4, 5, 6];
     return Container(
       color: Colors.grey[200],
       padding: EdgeInsets.fromLTRB(10, 25, 10, 10),
@@ -29,11 +43,52 @@ class SearchSection extends StatelessWidget {
                     ],
                   ),
                   child: TextField(
+                    controller: name1,
                     decoration: InputDecoration(
                       hintText: 'London',
                       contentPadding: EdgeInsets.all(10),
                       border: InputBorder.none,
                     ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 4,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(25),
+                  ),
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    print(name1.text);
+                    print(testdata["title"]);
+                    print("***********************************");
+                    final index1 = hotelList.indexWhere(
+                        (element) => element["title"] == name1.text);
+                    if (index1 != -1) {
+                      print("Index $index1: ${hotelList[index1]}");
+                    }
+                  },
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                    size: 26,
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.all(10),
+                    shape: CircleBorder(),
+                    shadowColor: Colors.white,
+                    primary: d_green,
                   ),
                 ),
               ),
@@ -65,7 +120,7 @@ class SearchSection extends StatelessWidget {
                     );
                   },
                   child: Icon(
-                    Icons.search,
+                    Icons.calendar_month_outlined,
                     color: Colors.white,
                     size: 26,
                   ),
@@ -76,7 +131,7 @@ class SearchSection extends StatelessWidget {
                     primary: d_green,
                   ),
                 ),
-              )
+              ),
             ],
           ),
           Row(

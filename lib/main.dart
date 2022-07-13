@@ -1,45 +1,16 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kayak/MyServices.dart';
 import 'HotelCard.dart';
 
-import 'calendar_page.dart';
+import 'SearchSection.dart';
+
 
 const d_green = Color(0xFF54D3C2);
-List hotelList2 = [];
-List hotelList = [
-  {
-    'title': 'Grand Royl Hotel',
-    'place': 'wembley, London',
-    'distance': 2,
-    'review': 36,
-    'picture': 'images/hotel_1.png',
-    'price': '180',
-  },
-  {
-    'title': 'Queen Hotel',
-    'place': 'wembley, London',
-    'distance': 3,
-    'review': 13,
-    'picture': 'images/hotel_2.png',
-    'price': '220',
-  },
-  {
-    'title': 'Grand Mal Hotel',
-    'place': 'wembley, London',
-    'distance': 6,
-    'review': 88,
-    'picture': 'images/hotel_3.png',
-    'price': '400',
-  },
-  {
-    'title': 'Hilton',
-    'place': 'wembley, London',
-    'distance': 11,
-    'review': 34,
-    'picture': 'images/hotel_4.png',
-    'price': '910',
-  },
-];
+MyService _myservice = MyService();
+List hotelList = _myservice.myMap;
+
 void main() {
   runApp(MyApp());
 }
@@ -118,12 +89,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class SearchSection extends StatefulWidget {
+/* class SearchSection extends StatefulWidget {
   @override
   State<SearchSection> createState() => _SearchSectionState();
 }
 
-final TextEditingController name1 = TextEditingController();
 String? recherche;
 
 class _SearchSectionState extends State<SearchSection> {
@@ -179,12 +149,13 @@ class _SearchSectionState extends State<SearchSection> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    print(firstList.contains((i) => i < 4));
-                    recherche = name1.text;
-                    hotelList2 = hotelList;
-
-                    hotelList.sort((a, b) => a.title.compareTo(recherche));
-                    setState(() {});
+                    print(name1.text);
+                    print("***********************************");
+                    final index1 = hotelList.indexWhere(
+                        (element) => element["title"] == name1.text);
+                    if (index1 != -1) {
+                      print("Index $index1: ${hotelList[index1]}");
+                    }
                   },
                   child: Icon(
                     Icons.search,
@@ -296,7 +267,7 @@ class _SearchSectionState extends State<SearchSection> {
       ),
     );
   }
-}
+} */
 
 class HotelSection extends StatefulWidget {
   @override
