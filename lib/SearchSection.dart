@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kayak/MyServices.dart';
+import 'package:kayak/filteredPage.dart';
 
 import 'calendar_page.dart';
 
@@ -8,6 +9,7 @@ final TextEditingController name1 = TextEditingController();
 const d_green = Color(0xFF54D3C2);
 MyService _myservice = MyService();
 List hotelList = _myservice.myMap;
+List<dynamic> _hotelList = [];
 dynamic testdata = hotelList[1];
 
 class SearchSection extends StatefulWidget {
@@ -77,7 +79,17 @@ class _SearchSectionState extends State<SearchSection> {
                         (element) => element["title"] == name1.text);
                     if (index1 != -1) {
                       print("Index $index1: ${hotelList[index1]}");
+                      _hotelList.add(hotelList[index1]);
+                      _myservice.setMonMontant2(_hotelList);
                     }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return HomePage2();
+                        },
+                      ),
+                    );
                   },
                   child: Icon(
                     Icons.search,

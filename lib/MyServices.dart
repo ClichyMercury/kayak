@@ -12,6 +12,7 @@ class MyService {
   //initialize variables in here
   MyService._internal() {
     List hotelList2 = [];
+    List hotelList3 = [];
   }
 
   List hotelList2 = [
@@ -49,14 +50,20 @@ class MyService {
     },
   ];
 
+  List hotelList3 = [];
   //short getter for my variable
 
   List get myMap => hotelList2;
+  List get myMap2 => hotelList3;
 
   //short setter for my variable
   // set setMyVariable(Pages value) => pages = value;
 
   void setMonMontant(List code) {
     this.hotelList2 = code as List;
+  }
+
+  void setMonMontant2(List code) {
+    this.hotelList3 = code as List;
   }
 }

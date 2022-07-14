@@ -6,7 +6,6 @@ import 'HotelCard.dart';
 
 import 'SearchSection.dart';
 
-
 const d_green = Color(0xFF54D3C2);
 MyService _myservice = MyService();
 List hotelList = _myservice.myMap;
@@ -50,13 +49,21 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-          color: Colors.grey[800],
-          size: 20,
-        ),
-        onPressed: null,
-      ),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.grey[800],
+            size: 20,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return HomePage();
+                },
+              ),
+            );
+          }),
       title: Text(
         'Explore',
         style: GoogleFonts.nunito(
